@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 import allure
 
 
-class SearchHotelPage:
+class SearchHotelsPage:
 
     def __init__(self, driver):
         self.driver = driver
