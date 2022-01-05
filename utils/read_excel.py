@@ -12,8 +12,7 @@ class ReadExcel:
         data = []
         for i in range(1, sheet.nrows):
             search_data = SearchHotelsData(sheet.cell(i, 0).value, sheet.cell(i, 1).value, sheet.cell(i, 2).value,
-                                          sheet.cell(i, 3).value, sheet.cell(i, 4).value, sheet.cell(i, 5).value,
-                                          sheet.cell(i, 6).value)
+                                          sheet.cell(i, 3).value, sheet.cell(i, 4).value)
             data.append(search_data)
         return data
 
@@ -23,7 +22,6 @@ class ReadExcel:
         sheet = wb.sheet_by_index(1)
         data = []
         for i in range(1, sheet.nrows):
-            search_data = SearchFlightsData(sheet.cell(i, 0).value, sheet.cell(i, 1).value, sheet.cell(i, 2).value,
-                                            sheet.cell(i, 3).value)
+            search_data = SearchFlightsData(sheet.cell(i, 0).value, sheet.cell(i, 1).value)
             data.append(search_data)
         return data

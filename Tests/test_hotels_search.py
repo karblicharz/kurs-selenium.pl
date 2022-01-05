@@ -14,7 +14,7 @@ class TestHotelsSearch:
     def test_hotels_search(self, data):
         search_hotels_page = SearchHotelsPage(self.driver)
         search_hotels_page.set_city(data.city)
-        search_hotels_page.set_date_range(data.check_in, data.check_out)
+        search_hotels_page.set_date_range_from_today(7)
         search_hotels_page.set_travellers(data.adult_travellers, data.child_travellers)
         search_hotels_page.click_search()
         search_results_page = SearchResultsPage(self.driver)

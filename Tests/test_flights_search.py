@@ -16,8 +16,7 @@ class TestFlightsSearch:
         search_flights_page.click_round_trip_checkbox()
         search_flights_page.set_from_airport(data.from_airport)
         search_flights_page.set_to_airport(data.to_airport)
-        search_flights_page.set_departure_date(data.departure)
-        search_flights_page.set_arrival_date(data.arrival)
+        search_flights_page.set_date_range_from_today(7)
         search_flights_page.set_passengers_number('3', '1', '1')
 
 

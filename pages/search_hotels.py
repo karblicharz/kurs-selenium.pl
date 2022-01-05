@@ -1,6 +1,7 @@
 from allure_commons.types import AttachmentType
 from selenium.webdriver.common.by import By
 import allure
+from datetime import date, timedelta
 
 
 class SearchHotelsPage:
@@ -25,18 +26,20 @@ class SearchHotelsPage:
         self.driver.find_element(By.CLASS_NAME, 'select2-match').click()
         allure.attach(self.driver.get_screenshot_as_png(), name='Set city', attachment_type=AttachmentType.PNG)
 
-    @allure.step("Setting date range from '{1}' to '{2}'")
-    def set_date_range(self, check_in, check_out):
-        self.driver.find_element(By.NAME, self.check_in_input_name).send_keys(check_in)
-        self.driver.find_element(By.NAME, self.check_out_input_name).send_keys(check_out)
-        allure.attach(self.driver.get_screenshot_as_png(), name='Set date', attachment_type=AttachmentType.PNG)
+    # @allure.step("Setting date range from '{1}' to '{2}'")
+    # def set_date_range(self, check_in, check_out):
+    #     self.driver.find_element(By.NAME, self.check_in_input_name).send_keys(check_in)
+    #     self.driver.find_element(By.NAME, self.check_out_input_name).send_keys(check_out)
+    #     allure.attach(self.driver.get_screenshot_as_png(), name='Set date', attachment_type=AttachmentType.PNG)
 
-        # self.driver.find_element(By.NAME, self.check_in_input_name).click()
-        # dates = self.driver.find_elements(By.XPATH, self.calendar_active_day_xpath)
-        # for date in dates:
-        #     if date.is_displayed():
-        #         date.click()
-        #         break
+    @allure.step("Setting date range from today to today + 'days'")
+    def set_date_range_from_today(self, days):
+        today = date.today()
+        check_in = today.strftime("%d/%m/%Y")
+        self.driver.find_element(By.NAME, self.check_in_input_name).send_keys(check_in)
+        future_date = date.today() + timedelta(days)
+        check_out = future_date.strftime("%d/%m/%Y")
+        self.driver.find_element(By.NAME, self.check_out_input_name).send_keys(check_out)
 
     @allure.step("Setting travellers - adult '{1}', child '{2}'")
     def set_travellers(self, adult, child):

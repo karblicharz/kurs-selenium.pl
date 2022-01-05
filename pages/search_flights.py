@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 import allure
+from datetime import date, timedelta
 
 
 class SearchFlightsPage:
@@ -35,11 +36,14 @@ class SearchFlightsPage:
         self.driver.find_element(By.XPATH, self.airport_input_xpath).send_keys(airport)
         self.driver.find_element(By.CLASS_NAME, 'select2-match').click()
 
-    def set_departure_date(self, departure_date):
-        self.driver.find_element(By.XPATH, self.departure_input_xpath).send_keys(departure_date)
-
-    def set_arrival_date(self, arrival_date):
-        self.driver.find_element(By.XPATH, self.arrival_input_xpath).send_keys(arrival_date)
+    @allure.step("Setting date range from today to today + 'days'")
+    def set_date_range_from_today(self, days):
+        today = date.today()
+        departure = today.strftime("%d/%m/%Y")
+        self.driver.find_element(By.XPATH, self.departure_input_xpath).send_keys(departure)
+        future_date = date.today() + timedelta(days)
+        arrival = future_date.strftime("%d/%m/%Y")
+        self.driver.find_element(By.XPATH, self.arrival_input_xpath).send_keys(arrival)
 
     def set_passengers_number(self, adult, child, infant):
         self.driver.find_element(By.XPATH, self.passenger_input_xpath).click()
