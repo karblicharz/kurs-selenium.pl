@@ -16,7 +16,11 @@ class TestFlightsSearch:
         search_flights_page.click_round_trip_checkbox()
         search_flights_page.set_from_airport(data.from_airport)
         search_flights_page.set_to_airport(data.to_airport)
-        search_flights_page.set_date_range_from_today(7)
+        search_flights_page.set_departure_date_at_today()
+        search_flights_page.set_arrival_date(7)
         search_flights_page.set_passengers_number('3', '1', '1')
-
+        search_flights_page.click_done_button()
+        search_flights_page.click_search_button()
+        assert search_flights_page.get_today_date_a_b_d() == search_flights_page.get_depart_date()
+        assert search_flights_page.get_future_date_a_b_d(7) == search_flights_page.get_return_date()
 

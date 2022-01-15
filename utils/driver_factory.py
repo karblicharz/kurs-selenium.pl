@@ -12,7 +12,7 @@ class DriverFactory:
             options.add_argument("start-maximized")
             return webdriver.Chrome(ChromeDriverManager().install(), options=options)
         if browser == 'firefox':
-            options = webdriver.ChromeOptions()
+            options = webdriver.FirefoxOptions()
             options.add_argument("start-maximized")
             return webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
         raise Exception('Provide valid browser name')
